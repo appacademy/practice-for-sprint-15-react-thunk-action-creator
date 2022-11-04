@@ -8,12 +8,13 @@ with Redux.
 Clone the starter repo accessible from the `Download Project` button at the
 bottom of this page.
 
-1. Install dependencies with `npm install`
-2. Copy the **.env.example** file to a new file in the same location called
+1. In the terminal, `cd` in the __backend__ directory of the starter.
+2. Install dependencies with `npm install`
+3. Copy the **.env.example** file to a new file in the same location called
    **.env**
    * The server should be listening for requests on port `5000`
    * The SQLite3 database file should be **db/dev.db**
-3. Run
+4. Run
    * `npm run db:setup` - create the database and tables and insert seed data
    * `npm start` - start the backend server
 
@@ -116,7 +117,9 @@ Remember to update the definition of the `loadArticles` function.
 
 > Note: Updating the `loadArticles` function will break your app because
 > `ArticleList`--as currently configured--will no longer be able to get the list
-> of articles to display. Do not worry about this now; you will fix it in the
+> of articles to display.
+> The `Uncaught TypeError: action.articles is not iterable` error in the console is expected for the rest of this practice.
+> Do not worry about this now; you will fix it in the
 > next practice!
 
 Time to test! Since the app is not functioning at the moment, you will need to
@@ -148,10 +151,10 @@ Check the logger result to make sure that `articleState.entries` has updated!
 
 Now it's your turn! Write a `writeArticle` thunk action creator in the
 __frontend/src/store/articleReducer.js__ file that takes in a `payload` and
-makes a `POST` request to `/api/articles`. To do this, you should pass an object
+makes a `POST` request to `/api/articles`. To do this, in the second argument of the `fetch`, pass an object
 specifying the `method`, `headers`--this should point to another object where
-`'Content-Type'` is set to `'application/json'`--and `body` (properly
-`stringify`-ed) as the second argument to `fetch`.
+`'Content-Type'` is set to `'application/json'`--and `body` (with properly
+`stringify`-ed `payload`).
 
 If the request is successful, call `dispatch` on the return value of
 `addArticle` invoked with the new article from the response. The action
